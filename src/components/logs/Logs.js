@@ -8,7 +8,7 @@ import { getLogs } from '../../actions/logActions';
 const Logs = ({ log: { logs, loading }, getLogs }) => {
   useEffect(() => {
     getLogs();
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   if (loading || logs === null) {
@@ -21,9 +21,9 @@ const Logs = ({ log: { logs, loading }, getLogs }) => {
         <h4 className='center'>System Logs</h4>
       </li>
       {!loading && logs.length === 0 ? (
-        <p className='center'> No logs to show...</p>
+        <p className='center'>No logs to show...</p>
       ) : (
-        logs.map((log) => <LogItem log={log} key={log.id} />)
+        logs.map(log => <LogItem log={log} key={log.id} />)
       )}
     </ul>
   );
@@ -31,11 +31,14 @@ const Logs = ({ log: { logs, loading }, getLogs }) => {
 
 Logs.propTypes = {
   log: PropTypes.object.isRequired,
-  getLogs: PropTypes.func.isRequired,
+  getLogs: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  log: state.log,
+const mapStateToProps = state => ({
+  log: state.log
 });
 
-export default connect(mapStateToProps, { getLogs })(Logs);
+export default connect(
+  mapStateToProps,
+  { getLogs }
+)(Logs);

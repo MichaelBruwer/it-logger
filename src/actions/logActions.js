@@ -7,25 +7,25 @@ import {
   UPDATE_LOG,
   SEARCH_LOGS,
   SET_CURRENT,
-  CLEAR_CURRENT,
+  CLEAR_CURRENT
 } from './types';
 
 // export const getLogs = () => {
-//     return async (dispatch) => {
-//         setLoading();
+//   return async dispatch => {
+//     setLoading();
 
-//         const res = await fetch('/logs');
-//         const data = await res.json();
+//     const res = await fetch('/logs');
+//     const data = await res.json();
 
-//         dispatch({
-//             type: GET_LOGS,
-//             payload:data
-//         })
-//     }
+//     dispatch({
+//       type: GET_LOGS,
+//       payload: data
+//     });
+//   };
 // };
 
-//get logs from server
-export const getLogs = () => async (dispatch) => {
+// Get logs from server
+export const getLogs = () => async dispatch => {
   try {
     setLoading();
 
@@ -34,18 +34,18 @@ export const getLogs = () => async (dispatch) => {
 
     dispatch({
       type: GET_LOGS,
-      payload: data,
+      payload: data
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.responce.statusText,
+      payload: err.response.statusText
     });
   }
 };
 
-//add new log
-export const addLog = (log) => async (dispatch) => {
+// Add new log
+export const addLog = log => async dispatch => {
   try {
     setLoading();
 
@@ -53,46 +53,46 @@ export const addLog = (log) => async (dispatch) => {
       method: 'POST',
       body: JSON.stringify(log),
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
     const data = await res.json();
 
     dispatch({
       type: ADD_LOG,
-      payload: data,
+      payload: data
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.responce.statusText,
+      payload: err.response.statusText
     });
   }
 };
 
-//delete log from server
-export const deleteLog = (id) => async (dispatch) => {
+// Delete log from server
+export const deleteLog = id => async dispatch => {
   try {
     setLoading();
 
     await fetch(`/logs/${id}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     });
 
     dispatch({
       type: DELETE_LOG,
-      payload: id,
+      payload: id
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.responce.statusText,
+      payload: err.response.statusText
     });
   }
 };
 
-//Update log on server
-export const updateLog = (log) => async (dispatch) => {
+// Update log on server
+export const updateLog = log => async dispatch => {
   try {
     setLoading();
 
@@ -100,26 +100,26 @@ export const updateLog = (log) => async (dispatch) => {
       method: 'PUT',
       body: JSON.stringify(log),
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
 
     const data = await res.json();
 
     dispatch({
       type: UPDATE_LOG,
-      payload: data,
+      payload: data
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.responce.statusText,
+      payload: err.response.statusText
     });
   }
 };
 
-// search server logs
-export const searchLogs = (text) => async (dispatch) => {
+// Search server logs
+export const searchLogs = text => async dispatch => {
   try {
     setLoading();
 
@@ -128,33 +128,34 @@ export const searchLogs = (text) => async (dispatch) => {
 
     dispatch({
       type: SEARCH_LOGS,
-      payload: data,
+      payload: data
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.responce.statusText,
+      payload: err.response.statusText
     });
   }
 };
 
-//set current log
-export const setCurrent = (log) => {
+// Set current log
+export const setCurrent = log => {
   return {
     type: SET_CURRENT,
-    payload: log,
+    payload: log
   };
 };
-//clear current log
+
+// Clear current log
 export const clearCurrent = () => {
   return {
-    type: CLEAR_CURRENT,
+    type: CLEAR_CURRENT
   };
 };
 
 // Set loading to true
 export const setLoading = () => {
   return {
-    type: SET_LOADING,
+    type: SET_LOADING
   };
 };

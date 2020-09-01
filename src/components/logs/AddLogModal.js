@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { addLog } from '../../actions/logActions';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-export const AddLogModal = (addLog) => {
+const AddLogModal = ({ addLog }) => {
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState('');
@@ -18,14 +18,14 @@ export const AddLogModal = (addLog) => {
         message,
         attention,
         tech,
-        date: new Date(),
+        date: new Date()
       };
 
       addLog(newLog);
 
       M.toast({ html: `Log added by ${tech}` });
 
-      //clear fields
+      // Clear Fields
       setMessage('');
       setTech('');
       setAttention(false);
@@ -42,22 +42,21 @@ export const AddLogModal = (addLog) => {
               type='text'
               name='message'
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={e => setMessage(e.target.value)}
             />
             <label htmlFor='message' className='active'>
-              {' '}
-              Log message{' '}
+              Log Message
             </label>
           </div>
         </div>
 
-        <div clasName='row'>
+        <div className='row'>
           <div className='input-field'>
             <select
               name='tech'
               value={tech}
               className='browser-default'
-              onChange={(e) => setTech(e.target.value)}
+              onChange={e => setTech(e.target.value)}
             >
               <option value='' disabled>
                 Select Technician
@@ -76,7 +75,7 @@ export const AddLogModal = (addLog) => {
                   className='filled-in'
                   checked={attention}
                   value={attention}
-                  onChange={(e) => setAttention(!attention)}
+                  onChange={e => setAttention(!attention)}
                 />
                 <span>Needs Attention</span>
               </label>
@@ -98,12 +97,15 @@ export const AddLogModal = (addLog) => {
 };
 
 AddLogModal.propTypes = {
-  addLog: PropTypes.func.isRequired,
+  addLog: PropTypes.func.isRequired
 };
 
 const modalStyle = {
   width: '75%',
-  height: '75%',
+  height: '75%'
 };
 
-export default connect(null, { addLog })(AddLogModal);
+export default connect(
+  null,
+  { addLog }
+)(AddLogModal);

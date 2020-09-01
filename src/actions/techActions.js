@@ -3,11 +3,11 @@ import {
   ADD_TECH,
   DELETE_TECH,
   SET_LOADING,
-  TECH_ERROR,
+  TECHS_ERROR
 } from './types';
 
-//get techs from server
-export const getTechs = () => async (dispatch) => {
+// Get techs from server
+export const getTechs = () => async dispatch => {
   try {
     setLoading();
 
@@ -16,18 +16,18 @@ export const getTechs = () => async (dispatch) => {
 
     dispatch({
       type: GET_TECHS,
-      payload: data,
+      payload: data
     });
   } catch (err) {
     dispatch({
-      type: TECH_ERROR,
-      payload: err.responce.statusText,
+      type: TECHS_ERROR,
+      payload: err.response.statusText
     });
   }
 };
 
-//add tech
-export const addTech = (tech) => async (dispatch) => {
+// Add technician to server
+export const addTech = tech => async dispatch => {
   try {
     setLoading();
 
@@ -35,47 +35,46 @@ export const addTech = (tech) => async (dispatch) => {
       method: 'POST',
       body: JSON.stringify(tech),
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
     const data = await res.json();
 
     dispatch({
       type: ADD_TECH,
-      payload: data,
+      payload: data
     });
   } catch (err) {
     dispatch({
-      type: TECH_ERROR,
-      payload: err.responce.statusText,
+      type: TECHS_ERROR,
+      payload: err.response.statusText
     });
   }
 };
 
-//Delete tech
-export const deleteTech = (id) => async (dispatch) => {
+export const deleteTech = id => async dispatch => {
   try {
     setLoading();
 
     await fetch(`/techs/${id}`, {
-      method: 'Delete',
+      method: 'DELETE'
     });
 
     dispatch({
       type: DELETE_TECH,
-      payload: id,
+      payload: id
     });
   } catch (err) {
     dispatch({
-      type: TECH_ERROR,
-      payload: err.responce.statusText,
+      type: TECHS_ERROR,
+      payload: err.response.statusText
     });
   }
 };
 
-//set loading to true
+// Set loading to true
 export const setLoading = () => {
   return {
-    type: SET_LOADING,
+    type: SET_LOADING
   };
 };

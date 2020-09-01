@@ -4,29 +4,29 @@ import PropTypes from 'prop-types';
 import { addTech } from '../../actions/techActions';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-export const AddTechModal = ({ addTech }) => {
+const AddTechModal = ({ addTech }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
   const onSubmit = () => {
     if (firstName === '' || lastName === '') {
-      M.toast({ html: 'Please enter a firstname and lastname' });
+      M.toast({ html: 'Please enter the first and last name' });
     } else {
       addTech({
         firstName,
-        lastName,
+        lastName
       });
 
       M.toast({ html: `${firstName} ${lastName} was added as a tech` });
 
-      //clear fields
+      // Clear Fields
       setFirstName('');
       setLastName('');
     }
   };
 
   return (
-    <div id='add-tech-modal' className='modal' style={modalStyle}>
+    <div id='add-tech-modal' className='modal'>
       <div className='modal-content'>
         <h4>New Technician</h4>
         <div className='row'>
@@ -35,7 +35,7 @@ export const AddTechModal = ({ addTech }) => {
               type='text'
               name='firstName'
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={e => setFirstName(e.target.value)}
             />
             <label htmlFor='firstName' className='active'>
               First Name
@@ -49,7 +49,7 @@ export const AddTechModal = ({ addTech }) => {
               type='text'
               name='lastName'
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={e => setLastName(e.target.value)}
             />
             <label htmlFor='lastName' className='active'>
               Last Name
@@ -70,13 +70,11 @@ export const AddTechModal = ({ addTech }) => {
   );
 };
 
-const modalStyle = {
-  width: '75%',
-  height: '75%',
-};
-
 AddTechModal.propTypes = {
-  addTech: PropTypes.func.isRequired,
+  addTech: PropTypes.func.isRequired
 };
 
-export default connect(null, { addTech })(AddTechModal);
+export default connect(
+  null,
+  { addTech }
+)(AddTechModal);

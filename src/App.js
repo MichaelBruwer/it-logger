@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import SearchBar from './components/layout/SearchBar';
 import Logs from './components/logs/Logs';
 import AddBtn from './components/layout/AddBtn';
@@ -15,7 +15,7 @@ import './App.css';
 
 const App = () => {
   useEffect(() => {
-    // init Materialize Js
+    // Init Materialize JS
     M.AutoInit();
   });
   return (
